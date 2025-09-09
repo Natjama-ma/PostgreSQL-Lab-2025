@@ -249,6 +249,8 @@ docker run --name postgres-lab \
 ```
 ใส่ Screenshot ของผลการรัน docker run ที่นี่
 ```
+<img width="891" height="192" alt="image" src="https://github.com/user-attachments/assets/32b08608-26b9-4749-9a18-e862a4fc7970" />
+
 
 ### Step 4: Verify Container Status and Resource Usage
 
@@ -273,6 +275,13 @@ docker volume inspect postgres-data
 2. ส่วนหนึ่งของ docker logs postgres-lab
 3. ผลการรัน docker stats
 ```
+<img width="1311" height="121" alt="image" src="https://github.com/user-attachments/assets/5ada448d-24a4-4fa5-92df-991394976c20" />
+
+<img width="1303" height="383" alt="image" src="https://github.com/user-attachments/assets/c6546ffd-1e41-4b34-bdba-bdd3c6ae0544" />
+
+<img width="1039" height="75" alt="image" src="https://github.com/user-attachments/assets/cb4e1c81-2090-42cd-9a99-7227b64026d0" />
+
+
 
 ### Step 5: Connect to PostgreSQL และตรวจสอบ Configuration
 
@@ -318,6 +327,21 @@ WHERE name IN ('shared_buffers', 'work_mem', 'maintenance_work_mem', 'effective_
 2. ผลการรัน SHOW shared_buffers; SHOW work_mem; SHOW maintenance_work_mem;SHOW effective_cache_size;
 3. ผลการรัน \l และ \du
 ```
+<img width="1165" height="496" alt="image" src="https://github.com/user-attachments/assets/6d0b5b2d-8cd6-4394-8346-80ebf5880603" />
+
+<img width="1262" height="143" alt="image" src="https://github.com/user-attachments/assets/cdddc3c9-2171-43b8-ac70-5722c7bcc044" />
+
+<img width="1354" height="136" alt="image" src="https://github.com/user-attachments/assets/43c3bda2-1f2c-4c49-9c25-d2f9440a2e53" />
+
+<img width="1314" height="140" alt="image" src="https://github.com/user-attachments/assets/576df873-80db-41f8-a8ab-bb798ac001c0" />
+
+<img width="1292" height="126" alt="image" src="https://github.com/user-attachments/assets/8cca42e7-0e53-4cdd-a806-538b6a188caa" />
+
+<img width="1146" height="493" alt="image" src="https://github.com/user-attachments/assets/85bde639-6839-4848-8723-8f97d363373e" />
+
+<img width="1333" height="135" alt="image" src="https://github.com/user-attachments/assets/c0d56fc8-6405-42e0-b5dd-4387b10d8208" />
+
+
 
 ### Step 6: Database Management Operations
 
@@ -362,6 +386,13 @@ WHERE datname = 'lab_db';
 2. ผลการรัน \l+ แสดงฐานข้อมูลทั้งหมด
 3. ผลการ query ข้อมูลฐานข้อมูล
 ```
+
+<img width="823" height="202" alt="image" src="https://github.com/user-attachments/assets/3c36e8d8-9523-43cd-85a1-021f0a8a9525" />
+
+<img width="1355" height="345" alt="image" src="https://github.com/user-attachments/assets/7697936d-46f4-4be7-ab42-a835aab369ca" />
+
+<img width="1302" height="489" alt="image" src="https://github.com/user-attachments/assets/754beeec-8f11-4f7f-a25b-0bb46b21738a" />
+
 
 ### Step 7: User และ Role Management
 
@@ -420,6 +451,38 @@ WHERE r.rolname NOT LIKE 'pg_%';
 2. ผลการรัน \du+
 3. ผลการ query pg_roles
 ```
+```
+ ผลการสร้าง users ทั้งหมด
+postgres=# CREATE USER lab_user WITH 
+    PASSWORD 'user123'
+    LOGIN
+    NOSUPERUSER
+    NOCREATEDB
+    NOCREATEROLE
+    NOINHERIT
+    NOREPLICATION
+    CONNECTION LIMIT 10;
+CREATE ROLE
+postgres=# CREATE USER admin_user WITH 
+    PASSWORD 'admin123' 
+    SUPERUSER 
+    CREATEDB 
+    CREATEROLE
+    LOGIN;
+CREATE ROLE
+postgres=# CREATE USER db_admin WITH
+    PASSWORD 'dbadmin123'
+    CREATEDB
+    CREATEROLE
+    LOGIN
+    NOSUPERUSER;
+CREATE ROLE
+```
+
+<img width="1291" height="268" alt="image" src="https://github.com/user-attachments/assets/c9280997-d3ef-4741-b4f6-102d6431338f" />
+
+<img width="1232" height="473" alt="image" src="https://github.com/user-attachments/assets/784653b4-5b0b-4d72-8e6b-5978898463ed" />
+
 
 ### Step 8: การจัดการสิทธิ์ User
 
@@ -482,11 +545,25 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 2. ผลการรัน \dp test_permissions
 3. ผลการ GRANT commands
 ```
+
+<img width="1324" height="99" alt="image" src="https://github.com/user-attachments/assets/e93036bf-335f-4a66-9b58-bf2f3f0b1b39" />
+
+<img width="1345" height="128" alt="image" src="https://github.com/user-attachments/assets/25ebdf99-584b-4d6c-8c82-ceb1516af844" />
+
+<img width="1312" height="449" alt="image" src="https://github.com/user-attachments/assets/cd07255d-06fc-4127-b432-928e8abd29c5" />
+
+
+
+
 **คำถาม
  ```
 Access Privileges   postgres=arwdDxtm/postgres มีความหมายอย่างไร
-
-
+ ```
+ ```
+postgres=arwdDxtm/postgres
+user postgres มีสิทธิ์เต็มทุกอย่างบน object นี้ และสิทธิ์มอบโดย postgres
+postgres = คนที่ได้สิทธิ์
+arwdDxtm = ชุดสิทธิ์ที่ได้รับ (insert , select , update , truncate ,references , trigger ,update column-level)
  ```
 ### Step 9: Schema Management และ Namespace
 
@@ -594,6 +671,18 @@ INSERT INTO hr.employee_orders (employee_id, customer_id, order_date, commission
 3. ผลการใส่ข้อมูลและ query ข้อมูล
 4. ข้อมูลในตาราง employee_orders ที่จะใช้สำหรับ JOIN ข้าม schema
 ```
+<img width="1170" height="391" alt="image" src="https://github.com/user-attachments/assets/54119a86-9994-460c-a3f7-086b100e737e" />
+
+<img width="1220" height="358" alt="image" src="https://github.com/user-attachments/assets/760079d6-0e3e-4d7c-b4b3-b933abecc351" />
+
+<img width="1188" height="164" alt="image" src="https://github.com/user-attachments/assets/571232e3-f469-4565-962e-8b05767e5d7c" />
+
+<img width="1313" height="394" alt="image" src="https://github.com/user-attachments/assets/486fa92d-a7d2-40df-9fb6-ac95ce4bf22d" />
+
+<img width="1315" height="246" alt="image" src="https://github.com/user-attachments/assets/4be87520-529c-4d2a-97f1-e05df47c3dc6" />
+
+<img width="1314" height="338" alt="image" src="https://github.com/user-attachments/assets/0b4c5027-a7b1-4c59-912d-c32f0aa1d9a8" />
+
 
 ### Step 10: ทดสอบการเข้าถึง Schema และ Search Path
 
