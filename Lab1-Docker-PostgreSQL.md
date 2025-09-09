@@ -548,7 +548,8 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 
 <img width="1324" height="99" alt="image" src="https://github.com/user-attachments/assets/e93036bf-335f-4a66-9b58-bf2f3f0b1b39" />
 
-<img width="1345" height="128" alt="image" src="https://github.com/user-attachments/assets/25ebdf99-584b-4d6c-8c82-ceb1516af844" />
+<img width="1283" height="206" alt="image" src="https://github.com/user-attachments/assets/d8e48e96-765b-42f0-a5e9-5149a35d5419" />
+
 
 <img width="1312" height="449" alt="image" src="https://github.com/user-attachments/assets/cd07255d-06fc-4127-b432-928e8abd29c5" />
 
@@ -751,6 +752,16 @@ SET search_path TO public;
 4. ข้อมูลที่แสดงจาก complex join ข้าม 3 schemas
 ```
 
+<img width="1334" height="132" alt="image" src="https://github.com/user-attachments/assets/e1efccee-4aaf-4517-b5fd-cf6042bd75e3" />
+
+<img width="1278" height="396" alt="image" src="https://github.com/user-attachments/assets/26f7c704-e941-4e45-8d07-c4196f91e754" />
+
+<img width="1307" height="435" alt="image" src="https://github.com/user-attachments/assets/bfd587b9-cd51-47d1-bde5-b39c174fb62b" />
+
+<img width="1278" height="341" alt="image" src="https://github.com/user-attachments/assets/67c70ac8-1652-4782-a8c0-d0e1b5b66d98" />
+
+
+
 ### Step 11: ทดสอบการเชื่อมต่อจาก User อื่น
 
 ```bash
@@ -781,6 +792,12 @@ INSERT INTO test_permissions (name) VALUES ('Test by lab_user'); -- ทำไม
 2. ผลการทดสอบสิทธิ์ต่างๆ
 3. ข้อความ error (ถ้ามี) เมื่อไม่มีสิทธิ์
 ```
+<img width="1168" height="91" alt="image" src="https://github.com/user-attachments/assets/dc9cc2e5-839c-4bcb-94f3-96f1fbdc7b61" />
+
+<img width="1191" height="344" alt="image" src="https://github.com/user-attachments/assets/fbbaf159-d59a-428a-b63e-ec795a59de10" />
+
+<img width="1205" height="179" alt="image" src="https://github.com/user-attachments/assets/9c4bcbee-d01a-4848-98d1-3a55625f4e5f" />
+
 
 ### Step 12: การจัดการ Volume และ Data Persistence
 
@@ -817,6 +834,14 @@ docker run --name postgres-backup-test \
 3. ผลการสร้าง container พร้อม bind mount
 ```
 
+<img width="1185" height="370" alt="image" src="https://github.com/user-attachments/assets/c170d758-9e36-4a41-9e14-6f9d690deb26" />
+
+<img width="1233" height="128" alt="image" src="https://github.com/user-attachments/assets/7859f4ed-5bf1-4ac7-821a-e6a97defec13" />
+
+<img width="1226" height="105" alt="image" src="https://github.com/user-attachments/assets/b8ca2ffc-ab46-4f99-b961-a033226c4ed7" />
+
+
+
 ## การตรวจสอบผลงานและ Performance
 
 ### Checkpoint 1: Container และ Resource Management
@@ -838,6 +863,9 @@ docker volume inspect postgres-data
 ```
 ใส่ Screenshot ของ resource usage และ volume information ที่นี่
 ```
+
+<img width="1187" height="425" alt="image" src="https://github.com/user-attachments/assets/0d423a40-31ac-47f2-abfa-22a5821e4cbe" />
+
 
 ### Checkpoint 2: Database Performance และ Configuration
 ```sql
@@ -889,6 +917,12 @@ WHERE state = 'active';
 2. Memory configuration
 3. Active connections
 ```
+<img width="1186" height="412" alt="image" src="https://github.com/user-attachments/assets/db39ff9a-33ec-40a5-8d1f-aa51beeb92cc" />
+
+<img width="1181" height="381" alt="image" src="https://github.com/user-attachments/assets/73914c09-110c-4141-826c-d39a0c2c7ef7" />
+
+<img width="1187" height="321" alt="image" src="https://github.com/user-attachments/assets/13423efd-6c0e-415e-918c-fd3625af6ead" />
+
 
 ## การแก้ไขปัญหาเบื้องต้น
 
