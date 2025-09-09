@@ -82,6 +82,8 @@ docker run hello-world
 ```
 ใส่ Screenshot ของผลการรัน docker --version และ docker run hello-world ที่นี่
 ```
+<img width="1114" height="483" alt="image" src="https://github.com/user-attachments/assets/1aed6c89-d1e7-4377-b0ae-2bb8c7cf5aa3" />
+
 
 ## ขั้นตอนการทดลอง
 
@@ -106,6 +108,88 @@ docker inspect postgres
 ```
 ใส่ Screenshot ของผลการรัน docker images ที่นี่
 ```
+<img width="1302" height="467" alt="image" src="https://github.com/user-attachments/assets/5e542976-5de6-4524-9daf-c4dfe5fa183f" />
+
+```
+[
+    {
+        "Id": "sha256:7be29db83c6f7084804058fe18952f19424fdab3131caaaf2e90dd21076e0341",
+        "RepoTags": [
+            "postgres:latest"
+        ],
+        "RepoDigests": [
+            "postgres@sha256:7be29db83c6f7084804058fe18952f19424fdab3131caaaf2e90dd21076e0341"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2025-09-08T20:04:25Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 161233640,
+        "GraphDriver": {
+            "Data": null,
+            "Name": "overlayfs"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:daf557c4f08e0cb77b2af2a08d8bca4f333cf408d88191911715e6f393eca215",
+                "sha256:dc138e461a05a4e4fa3cfd5a2d71ede572302939fed3b655dcbb25bf1fcf60f7",
+                "sha256:7c4190151c1b5635a67495d2e32da60261d0725200ff00967fc8028d6cbc575a",
+                "sha256:c88342a46ab489f98c59be325bc55b8e85633ef209e35efa6d545fdf86646a61",
+                "sha256:7a21e896d4ffbc0e2a51ba5bb1675c35ef8558cdf0965a6c8c2a144a51fc4e5e",
+                "sha256:fc11892dea433f101badeb9c56e27ade72886f6d563e12e5aa87a9f6a92f667e",
+                "sha256:c464b36f8368c20e816aac91e3ac6d9ffffe64db27a6e0e44591e50a9f338b4d",
+                "sha256:9a9c5a2faf5583db9b2011059308c3380406327b7c61fce0ab39b17ebb08213c",
+                "sha256:4e385a15ff02d7a235266904b333bcd8b9861788770446eaf79d2f45595b8547",
+                "sha256:54066a1a5524dbe203f86ab9f84dc805e37048039bcc08bbe20329520c9d098e",
+                "sha256:318f76d63bfb29412fa017c61aea4f5398ae250e4907d893bbccb74177d798b5",
+                "sha256:b86740af0101b83ff7234d9b63efe9286d70c30baba74ab3f36352b5cc32ab0a",
+                "sha256:d1b7fe873873803d7870cfea1e0a6897c8cfad11b1de4cbd25fdf0d11b5fc481",
+                "sha256:3f010b4c9898cc755a97a042765530497eb72ec002d51c1af9fbb65005ad3151"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2025-09-09T03:07:39.715405115Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:7be29db83c6f7084804058fe18952f19424fdab3131caaaf2e90dd21076e0341",
+            "size": 10229
+        },
+        "Config": {
+            "Cmd": [
+                "postgres"
+            ],
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/17/bin",
+                "GOSU_VERSION=1.18",
+                "LANG=en_US.utf8",
+                "PG_MAJOR=17",
+                "PG_VERSION=17.6-1.pgdg13+1",
+                "PGDATA=/var/lib/postgresql/data"
+            ],
+            "ExposedPorts": {
+                "5432/tcp": {}
+            },
+            "Labels": null,
+            "OnBuild": null,
+            "StopSignal": "SIGINT",
+            "User": "",
+            "Volumes": {
+                "/var/lib/postgresql/data": {}
+            },
+            "WorkingDir": ""
+        }
+    }
+]
+```
+
 
 ### Step 2: Create Docker Volume for Data Persistence
 
@@ -129,6 +213,8 @@ docker volume create postgres-config
 ```
 ใส่ Screenshot ของผลการรัน docker volume ls และ docker volume inspect postgres-data ที่นี่
 ```
+<img width="753" height="440" alt="image" src="https://github.com/user-attachments/assets/f041cbb0-9cfe-463c-a3bf-50e12608ad3e" />
+
 
 ### Step 3: Create PostgreSQL Container with Volume
 
