@@ -977,7 +977,18 @@ docker volume create postgres-data
 - Volume: `multi-postgres-data`
 
 ```bash
-# พื้นที่สำหรับคำตอบ - เขียน command ที่ใช้
+docker run -d \
+  --name multi-postgres \
+  -e POSTGRES_PASSWORD=multipass123 \
+  -p 5434:5432 \
+  --memory="1536m" \
+  --cpus="1.5" \
+  -v multi-postgres-data:/var/lib/postgresql/data \
+  postgres
+
+oneliner:
+docker run -d --name multi-postgres -e POSTGRES_PASSWORD=multipass123 -p 5434:5432 --memory="1536m" --cpus="1.5" -v multi-postgres-data:/var/lib/postgresql/data postgres
+
 
 ```
 
@@ -988,6 +999,13 @@ docker volume create postgres-data
 2. docker ps แสดง container ใหม่
 3. docker stats แสดงการใช้ resources
 ```
+
+<img width="1312" height="163" alt="image" src="https://github.com/user-attachments/assets/19c5be62-f4e8-4767-8d82-44d7e800be9f" />
+
+<img width="1305" height="163" alt="image" src="https://github.com/user-attachments/assets/18525851-f851-4a41-abaf-653f86ce4786" />
+
+<img width="1315" height="104" alt="image" src="https://github.com/user-attachments/assets/08863d3d-ba5e-4c75-a094-e0df5a56e598" />
+
 
 ### แบบฝึกหัด 2: User Management และ Security
 **คำสั่ง**: สร้างระบบผู้ใช้ที่สมบูรณ์:
@@ -1003,7 +1021,22 @@ docker volume create postgres-data
    - `admin_user` (รหัสผ่าน: `admin123`) - เป็นสมาชิกของ db_admins
 
 ```sql
--- พื้นที่สำหรับคำตอบ - เขียน SQL commands ที่ใช้
+-- สร้าง Role Groups
+CREATE ROLE app_developers NOLOGIN;
+CREATE ROLE data_analysts NOLOGIN;
+CREATE ROLE db_admins NOLOGIN;
+
+-- สร้าง Users และกำหนดรหัสผ่าน
+CREATE ROLE dev_user LOGIN PASSWORD 'dev123';
+CREATE ROLE analyst_user LOGIN PASSWORD 'analyst123';
+CREATE ROLE admin_user LOGIN PASSWORD 'admin123';
+
+-- จัด Users เข้ากลุ่ม
+GRANT app_developers TO dev_user;
+GRANT data_analysts TO analyst_user;
+GRANT db_admins TO admin_user;
+
+\du
 
 ```
 
@@ -1014,6 +1047,9 @@ docker volume create postgres-data
 2. ผลการรัน \du แสดงผู้ใช้ทั้งหมด
 3. ผลการทดสอบเชื่อมต่อด้วย user ต่างๆ
 ```
+
+<img width="928" height="431" alt="image" src="https://github.com/user-attachments/assets/02936054-0af2-4741-9274-f9b68ccf5a35" />
+
 
 ### แบบฝึกหัด 3: Schema Design และ Complex Queries
 **คำสั่ง**: สร้างระบบฐานข้อมูลร้านค้าออนไลน์:
@@ -1162,13 +1198,41 @@ INSERT INTO ecommerce.order_items (order_id, product_id, quantity, price) VALUES
 ```
 
 **ผลการทำแบบฝึกหัด 3:**
-```
+
 ใส่ Screenshot ของ:
 1. โครงสร้าง schemas และ tables (\dn+, \dt ecommerce.*)
+
+<img width="1311" height="243" alt="image" src="https://github.com/user-attachments/assets/9fe5f877-4d54-4548-9435-0b5ac7ff8649" />
+
+<img width="1313" height="240" alt="image" src="https://github.com/user-attachments/assets/c82179c7-95cc-4446-b9d1-84ba56945ac0" />
+
+<img width="1309" height="288" alt="image" src="https://github.com/user-attachments/assets/efcb53be-1f02-446f-8b0b-ad2a048e9a25" />
+
+<img width="1307" height="357" alt="image" src="https://github.com/user-attachments/assets/d3bf7f5a-981d-4ae2-8df4-db85fc5724ba" />
+
+<img width="1312" height="364" alt="image" src="https://github.com/user-attachments/assets/e03c5fe8-c12b-4f87-8db2-ebe005a81943" />
+
+<img width="1306" height="386" alt="image" src="https://github.com/user-attachments/assets/4f4acc14-399d-4103-905c-c4566db1bf37" />
+
+<img width="1313" height="432" alt="image" src="https://github.com/user-attachments/assets/fe50a451-a420-4926-b98f-23d2dd4eb93b" />
+
 2. ข้อมูลตัวอย่างในตารางต่างๆ
+
+<img width="1305" height="234" alt="image" src="https://github.com/user-attachments/assets/3dea4e54-33aa-4d61-ad6f-bed50def678c" />
+
+<img width="1314" height="353" alt="image" src="https://github.com/user-attachments/assets/c43a66d2-8ff6-4394-b84b-6f0ce374ed8b" />
+
+<img width="1306" height="295" alt="image" src="https://github.com/user-attachments/assets/655cda25-4d3b-4a57-8ab3-30c52daa1824" />
+
+
 3. ผลการรัน queries ที่สร้าง
+
+<img width="1306" height="376" alt="image" src="https://github.com/user-attachments/assets/adbb4530-a6e5-48a0-befe-0efc98b844a8" />
+
+
 4. การวิเคราะห์ข้อมูลที่ได้
-```
+
+<img width="1300" height="230" alt="image" src="https://github.com/user-attachments/assets/af9fa1b8-a5bd-46b9-aa30-177a2768d067" />
 
 
 ## การทดสอบความเข้าใจ
@@ -1183,7 +1247,10 @@ INSERT INTO ecommerce.order_items (order_id, product_id, quantity, price) VALUES
 
 **คำตอบ Quiz 1:**
 ```
-เขียนคำตอบที่นี่
+1.Named Volume Docker จะจัดการได้โดยตรง แต่ Bind Mount ผูก (mount) โฟลเดอร์ในเครื่องเข้าใน container โดยตรง
+2. เพราะเป็นค่าที่พอดี ถ้าตั้งน้อยไปก็ต้องอ่านจาก disk บ่อยจนช้า แต่ถ้าตั้งเยอะไปก็แย่ง RAM จากระบบปฏิบัติการจนไม่เหลือให้ OS cache ข้อมูล
+3.แยกข้อมูลตามงานได้ ช่วยป้องกันการชนกันของชื่อตาราง รวมถึงจัดการสิทธิ์การเข้าถึงได้ง่ายขึน
+4. ใช้งานง่าย สามารถแยกโปรเจกต์ออกจากกันไม่ให้ข้อมูลปนกันได้และทดสอบง่าย
 ```
 
 
